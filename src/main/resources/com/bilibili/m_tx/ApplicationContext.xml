@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--    1.datasource-->
+    <bean id="dataSource_tx" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://192.168.1.6:3306/mysql?useSSL=false&amp;characterEncoding=UTF-8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="By9216446o6"/>
+    </bean>
+    <!--    2.dao-->
+    <bean id="accoutDao" class="com.bilibili.m_tx.dao.impl.AccountDaoImpl">
+        <property name="dataSource" ref="dataSource_tx"/>
+    </bean>
+    <!--    3.service-->
+    <bean id="accoutService" class="com.bilibili.m_tx.service.impl.AccountServiceImpl">
+        <property name="accountDao" ref="accoutDao"/>
+        <property name="transactionTemplate" ref="transactionTemplate"/>
+    </bean>
+<!--    4.创建模板-->
+    <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager" ref="txManager"/>
+    </bean>
+<!--    5.配置事物管理器,它需要事物,事物从connect获得,connnect从datasource中获得-->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource_tx"/>
+    </bean>
+</beans>
+
+

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--    ioc控制反转:由Spring来创建对象,封装在配置文件bean标签内-->
+
+    <!--    方式一:组件扫描: 在类前面使用注解替换之xml配置bean id,但调用还是要用几行代码-->
+    <!--    <bean id="userService" class="com.bilibili.annotation.ioc.UserServiceImpl"/>-->
+    <context:component-scan base-package="com.bilibili.g_annotation.ioc"/>
+    <!--    方式二:Configuration类,通方式一,调用方法换了一下-->
+
+</beans>

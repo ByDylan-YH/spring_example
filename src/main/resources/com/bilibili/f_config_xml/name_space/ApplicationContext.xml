@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--    命名空间注入:对sproperty进行简化-->
+    <bean id="personname_space" class="com.bilibili.f_config_xml.name_space.Person" p:name="冰忆" p:age="25" p:homedir-ref="homedirname_space"
+          p:companydir-ref="companydirname_space"/>
+
+    <bean id="homedirname_space" class="com.bilibili.f_config_xml.name_space.Address" p:addr="依山郡" p:tel="18323720712"/>
+
+    <bean id="companydirname_space" class="com.bilibili.f_config_xml.name_space.Address" p:addr="重庆" p:tel="555"/>
+</beans>

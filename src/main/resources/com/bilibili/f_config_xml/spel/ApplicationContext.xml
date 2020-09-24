@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--    spel:对property进行统一编程,只留下name,value-->
+    <bean id="customer_spel" class="com.bilibili.f_config_xml.spel.Customer" >
+<!--        <property name="name" value="冰忆"/>-->
+        <property name="name" value="#{'冰忆'}"/>
+<!--        <property name="name" value="#{customer.name}"/>-->
+<!--        判断是否为空,是就返回null,这样不会报错-->
+<!--        <property name="name" value="#{customer.name?.toUpperCase()}"/>-->
+        <property name="pi" value="#{T(Math).PI}"/>
+    </bean>
+</beans>

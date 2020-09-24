@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--    setter方法注入-->
+    <bean id="person_setter" class="com.bilibili.f_config_xml.setter.Person">
+        <!--        普通数据-->
+        <property name="name" value="冰忆"/>
+        <property name="age" value="25"/>
+        <!--        引用数据-->
+        <property name="homedir" ref="homedir"/>
+        <property name="companydir" ref="companydir"/>
+    </bean>
+
+    <bean id="homedir" class="com.bilibili.f_config_xml.setter.Address">
+        <property name="addr" value="依山郡"/>
+        <property name="tel" value="18323720712"/>
+    </bean>
+
+    <bean id="companydir" class="com.bilibili.f_config_xml.setter.Address">
+        <property name="addr" value="重庆"/>
+        <property name="tel" value="555"/>
+    </bean>
+</beans>

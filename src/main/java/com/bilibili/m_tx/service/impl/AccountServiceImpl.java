@@ -1,0 +1,45 @@
+package com.bilibili.m_tx.service.impl;
+
+import com.bilibili.m_tx.dao.AccountDao;
+import com.bilibili.m_tx.service.AccountService;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
+import org.springframework.transaction.support.TransactionTemplate;
+
+/**
+ * Author:BY
+ * Date:2020/3/21
+ * Description:
+ */
+class AccountServiceImpl implements AccountService {
+    private AccountDao accountDao;
+
+    public void setAccountDao(AccountDao accountDao) {
+        this.accountDao = accountDao;
+    }
+
+    //    2.手动注入模板写法
+    private TransactionTemplate transactionTemplate;
+
+    public void setTransactionTemplate(TransactionTemplate transactionTemplate) {
+        this.transactionTemplate = transactionTemplate;
+    }
+
+    @Override
+    public void transfer(final String outer,final String inner,final Integer money) {
+//        1.一般写法
+//        accountDao.in(inner, money);
+//        模拟异常,会发现问题
+//        int i = 1 / 0;
+//        accountDao.out(outer, money);
+//        2.手动注入模板写法,由于是内部类,记得把参数设置为final,防止内部类改变参数,或者防止外部改变参数
+        transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+            @Override
+            protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
+                accountDao.in(inner, money);
+//                int i = 1 / 0;
+                accountDao.out(outer, money);
+            }
+        });
+    }
+}

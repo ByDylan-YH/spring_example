@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--    1.创建目标类-->
+    <bean id="userService" class="com.bilibili.i_factory_bean.service.impl.UserServiceImpl"/>
+    <!--    2.创建切面类-->
+    <bean id="myAspect" class="com.bilibili.i_factory_bean.MyAspect"/>
+    <!--    3.创建代理类,半自动-->
+    <bean id="proxyService" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="interfaces" value="com.bilibili.i_factory_bean.service.UserService"/>
+        <property name="target" ref="userService"/>
+        <property name="interceptorNames" value="myAspect"/>
+<!--        强制使用cglib-->
+        <property name="optimize" value="true"/>
+    </bean>
+</beans>

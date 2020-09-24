@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--    1.创建目标类-->
+    <bean id="userService_aspect" class="com.bilibili.k_aspect.xml.service.impl.UserServiceImpl"/>
+    <!--    2.创建切面类-->
+    <bean id="myAspect_aspect" class="com.bilibili.k_aspect.xml.MyAspect"/>
+    <!--    3.创建代理类,全自动,aop编程-->
+    <!--    3.1导入aop命名空间-->
+    <!--    3.2使用aop:config进行配置-->
+    <!--    proxy-target-class=true使用cglib-->
+    <aop:config>
+        <aop:aspect ref="myAspect_aspect">
+            <aop:pointcut id="myPointCut" expression="execution(* com.bilibili.k_aspect.xml.service.impl.UserServiceImpl.*(..))"/>
+            <!--            <aop:before method="myBefore" pointcut-ref="myPointCut"/>-->
+            <!--            <aop:after-returning method="myAafterReturning" pointcut-ref="myPointCut" returning="ret"/>-->
+            <!--            <aop:around method="myAround" pointcut-ref="myPointCut"/>-->
+<!--            <aop:after-throwing method="MyAfterThrowing" pointcut-ref="myPointCut" throwing="e"/>-->
+            <aop:after method="myAfter" pointcut-ref="myPointCut"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
+
+
